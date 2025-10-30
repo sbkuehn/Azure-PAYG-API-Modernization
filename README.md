@@ -164,6 +164,6 @@ MIT License
 Copyright (c) 2025
 
 ## Author
-<br><br>Shannon Eldridge-Kuehn
+<br>Shannon Eldridge-Kuehn
 <br>Principal Solutions Architect | Cloud, FinOps, and Platform Engineering
-<br>shankuehn.io
+<br>https://shankuehn.io

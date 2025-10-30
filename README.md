@@ -116,14 +116,12 @@ python scripts/create_or_update_cost_export.py
 
 Both scripts will:
 
-Validate that the target container exists
-
-Create or update a scheduled export
-
-Write files to costexports/ inside the container
+- Validate that the target container exists
+- Create or update a scheduled export
+- Write files to costexports/ inside the container
 
 CI/CD Integration
-You can schedule the scripts to run automatically using GitHub Actions or Azure DevOps.
+- You can schedule the scripts to run automatically using GitHub Actions or Azure DevOps.
 
 Example GitHub Actions Workflow
 .github/workflows/export-refresh.yml
@@ -158,13 +156,10 @@ This workflow will automatically refresh your export daily.
 Next Steps
 In the next phase, you can:
 
-Ingest exported CSV files into Azure Data Factory or Synapse
-
-Clean and transform cost data for FinOps dashboards
-
-Connect Power BI to the storage container for automated reporting
-
-See the companion post “Turning Cost Data Into Insight: Automating PAYG Reports with ADF and Power BI” for details.
+- Ingest exported CSV files into Azure Data Factory or Synapse
+- Clean and transform cost data for FinOps dashboards
+- Connect Power BI to the storage container for automated reporting
+- See the companion post “Turning Cost Data Into Insight: Automating PAYG Reports with ADF and Power BI” for details.
 
 License
 MIT License

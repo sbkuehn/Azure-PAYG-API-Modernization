@@ -71,7 +71,8 @@ Copy code
 1. **Clone the repository**
    ```bash
    git clone https://github.com/<your-org>/azure-payg-modernization.git
-   cd azure-payg-modernization~~~
+   cd azure-payg-modernization
+
    
 Authenticate to Azure
 
@@ -79,33 +80,40 @@ For PowerShell:
 
 ```powershell
 Connect-AzAccount
+```
 
 For Python (inside Azure or locally):
 
-bash
-Copy code
+```bash
 az login
+```
+
 Set environment variables for Python
 
 bash
-Copy code
-export AZURE_SUBSCRIPTION_ID=<subscription-id>
+```export AZURE_SUBSCRIPTION_ID=<subscription-id>
 export STORAGE_ACCOUNT_ID="/subscriptions/<subscription-id>/resourceGroups/<rg>/providers/Microsoft.Storage/storageAccounts/<account>"
 export CONTAINER_NAME=exports
+```
+
 Running the Scripts
+
 PowerShell
-powershell
-Copy code
+```powershell
 .\scripts\Create-Or-Update-AzCostExport.ps1 `
   -SubscriptionId "00000000-0000-0000-0000-000000000000" `
   -ResourceGroupName "finops-rg" `
   -StorageAccountName "finopsstorage01" `
   -ContainerName "exports" `
   -TriggerNow
+```
+
 Python
-bash
-Copy code
+
+```bash
 python scripts/create_or_update_cost_export.py
+```
+
 Both scripts will:
 
 Validate that the target container exists
@@ -120,8 +128,7 @@ You can schedule the scripts to run automatically using GitHub Actions or Azure 
 Example GitHub Actions Workflow
 .github/workflows/export-refresh.yml
 
-yaml
-Copy code
+```yaml
 name: Refresh Azure Cost Export
 on:
   schedule:
@@ -144,6 +151,7 @@ jobs:
         run: |
           pip install -r scripts/requirements.txt
           python scripts/create_or_update_cost_export.py
+```
 
 This workflow will automatically refresh your export daily.
 

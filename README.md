@@ -71,8 +71,7 @@ yaml
    ```bash
    git clone https://github.com/<your-org>/azure-payg-modernization.git
    cd azure-payg-modernization
-
-   
+      
 Authenticate to Azure
 
 For PowerShell:
@@ -164,7 +163,7 @@ License
 MIT License
 Copyright (c) 2025
 
-##Author
+## Author
 <br><br>Shannon Eldridge-Kuehn
-<br><br>Principal Solutions Architect | Cloud, FinOps, and Platform Engineering
-<br><br>shankuehn.io
+<br>Principal Solutions Architect | Cloud, FinOps, and Platform Engineering
+<br>shankuehn.io

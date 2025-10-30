@@ -71,14 +71,15 @@ Copy code
 1. **Clone the repository**
    ```bash
    git clone https://github.com/<your-org>/azure-payg-modernization.git
-   cd azure-payg-modernization
+   cd azure-payg-modernization~~~
+   
 Authenticate to Azure
 
 For PowerShell:
 
-powershell
-Copy code
+```powershell
 Connect-AzAccount
+
 For Python (inside Azure or locally):
 
 bash

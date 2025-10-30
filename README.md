@@ -51,19 +51,18 @@ You can then connect the container to:
 ## Scripts  
 
 ### PowerShell: [`Create-Or-Update-AzCostExport.ps1`](./scripts/Create-Or-Update-AzCostExport.ps1)  
-Creates or updates a daily export. Optionally triggers the export immediately after creation.  
-Requires the Az PowerShell modules (Accounts, Resources, Storage, CostManagement).  
+- Creates or updates a daily export. Optionally triggers the export immediately after creation.  
+- Requires the Az PowerShell modules (Accounts, Resources, Storage, CostManagement).  
 
 ### Python: [`create_or_update_cost_export.py`](./scripts/create_or_update_cost_export.py)  
-Authenticates using Managed Identity or Service Principal via `DefaultAzureCredential` and performs the same export configuration.  
+- Authenticates using Managed Identity or Service Principal via `DefaultAzureCredential` and performs the same export configuration.  
 
-`requirements.txt`  
+```bash
+requirements.txt`  
 azure-identity>=1.15.0
 requests>=2.31.0
-
+```
 yaml
-Copy code
-
 ---
 
 ## Setup  
@@ -165,7 +164,7 @@ License
 MIT License
 Copyright (c) 2025
 
-Author
-Shannon Eldridge-Kuehn
-Principal Solutions Architect | Cloud, FinOps, and Platform Engineering
-shankuehn.io
+##Author
+<br><br>Shannon Eldridge-Kuehn
+<br><br>Principal Solutions Architect | Cloud, FinOps, and Platform Engineering
+<br><br>shankuehn.io

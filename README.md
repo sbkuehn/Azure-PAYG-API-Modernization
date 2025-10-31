@@ -57,8 +57,8 @@ You can then connect the container to:
 ### Python: [`create_or_update_cost_export.py`](./scripts/create_or_update_cost_export.py)  
 - Authenticates using Managed Identity or Service Principal via `DefaultAzureCredential` and performs the same export configuration.  
 
-```bash
-requirements.txt`  
+Requirements to run Python are listed in: requirements.txt
+```bash 
 azure-identity>=1.15.0
 requests>=2.31.0
 ```

@@ -50,11 +50,11 @@ You can then connect the container to:
 
 ## Scripts  
 
-### PowerShell: [`Create-Or-Update-AzCostExport.ps1`](https://github.com/sbkuehn/Azure-PAYG-API-Modernization/blob/main/Create-Or-Update-AzCostExport.ps1)  
+### PowerShell: [`Create-Or-Update-AzCostExport.ps1`](./scripts/Create-Or-Update-AzCostExport.ps1)  
 Creates or updates a daily export. Optionally triggers the export immediately after creation.  
 Requires the Az PowerShell modules (Accounts, Resources, Storage, CostManagement).  
 
-### Python: [`create_or_update_cost_export.py`](https://github.com/sbkuehn/Azure-PAYG-API-Modernization/blob/main/create_or_update_cost_export.py)  
+### Python: [`create_or_update_cost_export.py`](./scripts/create_or_update_cost_export.py)  
 Authenticates using Managed Identity or Service Principal via `DefaultAzureCredential` and performs the same export configuration.  
 
 `requirements.txt`  
@@ -159,6 +159,55 @@ In the next phase, you can:
 - Connect **Power BI** to the storage container for automated reporting  
 
 See the companion post **“Turning Cost Data Into Insight: Automating PAYG Reports with ADF and Power BI”** for details.  
+
+---
+
+
+---
+
+## PowerShell: Before and After
+
+### Before (Legacy API)
+```powershell
+# Legacy Usage Details API (Deprecated)
+$uri = "https://management.azure.com/subscriptions/$subscriptionId/providers/Microsoft.Commerce/UsageAggregates?api-version=2015-06-01-preview"
+
+$response = Invoke-RestMethod -Uri $uri -Headers @{ Authorization = "Bearer $token" }
+$response.value | Select-Object usageStartTime, usageEndTime, resourceUri, quantity, meterCategory, cost
+```
+
+### After (Modern API)
+```powershell
+# Modern Exports API (Supported)
+$uri = "https://management.azure.com/subscriptions/$subscriptionId/providers/Microsoft.CostManagement/exports/$exportName?api-version=2023-03-01"
+```
+
+**What changed:**  
+- The endpoint switched from `Microsoft.Commerce` to `Microsoft.CostManagement`  
+- The verb changed from `GET` to `PUT` to create or update an export  
+- You no longer parse `$response.value`; instead, your job reads CSVs from Blob Storage  
+
+---
+
+## Python: Before and After
+
+### Before (Legacy API)
+```python
+url = f"https://management.azure.com/subscriptions/{subscription_id}/providers/Microsoft.Commerce/UsageAggregates?api-version=2015-06-01-preview"
+response = requests.get(url, headers=headers)
+data = response.json()
+```
+
+### After (Modern API)
+```python
+url = f"https://management.azure.com/subscriptions/{subscription_id}/providers/Microsoft.CostManagement/exports/{export_name}?api-version=2023-03-01"
+response = requests.put(url, headers=headers, json=payload)
+```
+
+**What changed:**  
+- The API path changed to `Microsoft.CostManagement/exports`  
+- The request changed from `GET` to `PUT`  
+- The response now confirms export creation instead of returning usage data directly  
 
 ---
 

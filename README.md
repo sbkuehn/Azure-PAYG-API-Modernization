@@ -50,7 +50,7 @@ You can then connect the container to:
 
 ## Scripts  
 
-### PowerShell: [`Create-Or-Update-AzCostExport.ps1`](./scripts/Create-Or-Update-AzCostExport.ps1)  
+### PowerShell: [`Create-Or-Update-AzCostExport.ps1`](https://github.com/sbkuehn/Azure-PAYG-API-Modernization/blob/main/Create-Or-Update-AzCostExport.ps1)  
 Creates or updates a daily export. Optionally triggers the export immediately after creation.  
 Requires the Az PowerShell modules (Accounts, Resources, Storage, CostManagement).  
 

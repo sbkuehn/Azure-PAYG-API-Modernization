@@ -54,7 +54,7 @@ You can then connect the container to:
 Creates or updates a daily export. Optionally triggers the export immediately after creation.  
 Requires the Az PowerShell modules (Accounts, Resources, Storage, CostManagement).  
 
-### Python: [`create_or_update_cost_export.py`](./scripts/create_or_update_cost_export.py)  
+### Python: [`create_or_update_cost_export.py`](https://github.com/sbkuehn/Azure-PAYG-API-Modernization/blob/main/create_or_update_cost_export.py)  
 Authenticates using Managed Identity or Service Principal via `DefaultAzureCredential` and performs the same export configuration.  
 
 `requirements.txt`  

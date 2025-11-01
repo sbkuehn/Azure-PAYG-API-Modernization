@@ -51,18 +51,18 @@ You can then connect the container to:
 ## Scripts  
 
 ### PowerShell: [`Create-Or-Update-AzCostExport.ps1`](./scripts/Create-Or-Update-AzCostExport.ps1)  
-- Creates or updates a daily export. Optionally triggers the export immediately after creation.  
-- Requires the Az PowerShell modules (Accounts, Resources, Storage, CostManagement).  
+Creates or updates a daily export. Optionally triggers the export immediately after creation.  
+Requires the Az PowerShell modules (Accounts, Resources, Storage, CostManagement).  
 
 ### Python: [`create_or_update_cost_export.py`](./scripts/create_or_update_cost_export.py)  
-- Authenticates using Managed Identity or Service Principal via `DefaultAzureCredential` and performs the same export configuration.  
+Authenticates using Managed Identity or Service Principal via `DefaultAzureCredential` and performs the same export configuration.  
 
-Requirements to run Python are listed in: requirements.txt
-```bash 
+`requirements.txt`  
+```
 azure-identity>=1.15.0
 requests>=2.31.0
 ```
-yaml
+
 ---
 
 ## Setup  
@@ -71,32 +71,30 @@ yaml
    ```bash
    git clone https://github.com/<your-org>/azure-payg-modernization.git
    cd azure-payg-modernization
-      
-Authenticate to Azure
+   ```
 
-For PowerShell:
+2. **Authenticate to Azure**
+   - For PowerShell:
+     ```powershell
+     Connect-AzAccount
+     ```
+   - For Python (inside Azure or locally):
+     ```bash
+     az login
+     ```
 
-```powershell
-Connect-AzAccount
-```
+3. **Set environment variables for Python**
+   ```bash
+   export AZURE_SUBSCRIPTION_ID=<subscription-id>
+   export STORAGE_ACCOUNT_ID="/subscriptions/<subscription-id>/resourceGroups/<rg>/providers/Microsoft.Storage/storageAccounts/<account>"
+   export CONTAINER_NAME=exports
+   ```
 
-For Python (inside Azure or locally):
+---
 
-```bash
-az login
-```
+## Running the Scripts  
 
-Set environment variables for Python
-
-bash
-```export AZURE_SUBSCRIPTION_ID=<subscription-id>
-export STORAGE_ACCOUNT_ID="/subscriptions/<subscription-id>/resourceGroups/<rg>/providers/Microsoft.Storage/storageAccounts/<account>"
-export CONTAINER_NAME=exports
-```
-
-Running the Scripts
-
-PowerShell
+### PowerShell  
 ```powershell
 .\scripts\Create-Or-Update-AzCostExport.ps1 `
   -SubscriptionId "00000000-0000-0000-0000-000000000000" `
@@ -106,24 +104,24 @@ PowerShell
   -TriggerNow
 ```
 
-Python
-
+### Python  
 ```bash
 python scripts/create_or_update_cost_export.py
 ```
 
-Both scripts will:
+Both scripts will:  
+- Validate that the target container exists  
+- Create or update a scheduled export  
+- Write files to `costexports/` inside the container  
 
-- Validate that the target container exists
-- Create or update a scheduled export
-- Write files to costexports/ inside the container
+---
 
-CI/CD Integration
-- You can schedule the scripts to run automatically using GitHub Actions or Azure DevOps.
+## CI/CD Integration  
 
-Example GitHub Actions Workflow
-.github/workflows/export-refresh.yml
+You can schedule the scripts to run automatically using GitHub Actions or Azure DevOps.  
 
+### Example GitHub Actions Workflow  
+`.github/workflows/export-refresh.yml`  
 ```yaml
 name: Refresh Azure Cost Export
 on:
@@ -151,19 +149,26 @@ jobs:
 
 This workflow will automatically refresh your export daily.
 
-Next Steps
-In the next phase, you can:
+---
 
-- Ingest exported CSV files into Azure Data Factory or Synapse
-- Clean and transform cost data for FinOps dashboards
-- Connect Power BI to the storage container for automated reporting
-- See the companion post “Turning Cost Data Into Insight: Automating PAYG Reports with ADF and Power BI” for details.
+## Next Steps  
 
-License
-MIT License
-Copyright (c) 2025
+In the next phase, you can:  
+- Ingest exported CSV files into **Azure Data Factory** or **Synapse**  
+- Clean and transform cost data for FinOps dashboards  
+- Connect **Power BI** to the storage container for automated reporting  
 
-## Author
-<br>Shannon Eldridge-Kuehn
-<br>Principal Solutions Architect | Cloud, FinOps, and Platform Engineering
-<br>https://shankuehn.io
+See the companion post **“Turning Cost Data Into Insight: Automating PAYG Reports with ADF and Power BI”** for details.  
+
+---
+
+## License  
+MIT License  
+Copyright (c) 2025  
+
+---
+
+## Author  
+**Shannon Eldridge-Kuehn**  
+Principal Solutions Architect | Cloud, FinOps, and Platform Engineering  
+[shankuehn.io](https://www.shankuehn.io)
